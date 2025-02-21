@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Yield Production Forecasting</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="investment, forecasting, yield" name="keywords">
+    <meta content="Investment Forecasting website" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Custom Styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f7fc;
+        }
+        .navbar {
+            background-color: #007bff;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .navbar-brand h1 {
+            font-weight: 600;
+            color: #fff;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #fff;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            color: #333;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group-text {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid sticky-top px-0">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="text-white m-0">Yield Production</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                  
+                    <a href="{{url_for('prediction3')}}" class="nav-item nav-link active">Yield Forecasting</a>
+                    <a href="{{url_for('index')}}" class="nav-item nav-link">Logout</a>
+                </div> 
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <div class="container py-5">
+        <div class="card">
+            <h2 class="text-center mb-4">Yield Production Forecasting</h2>
+            <form method="POST" action="/prediction3">
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="text" id="year" name="year" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rainfall">Average Rainfall (mm/year):</label>
+                    <input type="text" id="rainfall" name="average_rainfall" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pesticides">Pesticides (tonnes):</label>
+                    <input type="text" id="pesticides" name="pesticides" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="temperature">Average Temperature (°C):</label>
+                    <input type="text" id="temperature" name="avg_temp" class="form-control" required>
+                </div>
+
+                 <div class="mb-3">
+                <label for="area">Area (ha):</label>
+            <select id="area" name="area" required>
+                <option value="0">Albania</option>
+                <option value="1">Algeria</option>
+                <option value="2">Angola</option>
+                <option value="3">Argentina</option>
+                <option value="4">Armenia</option>
+                <option value="5">Australia</option>
+                <option value="6">Austria</option>
+                <option value="7">Azerbaijan</option>
+                <option value="8">Bahamas</option>
+                <option value="9">Bahrain</option>
+                <option value="10">Bangladesh</option>
+                <option value="11">Belarus</option>
+                <option value="12">Belgium</option>
+                <option value="13">Botswana</option>
+                <option value="14">Brazil</option>
+                <option value="15">Bulgaria</option>
+                <option value="16">Burkina Faso</option>
+                <option value="17">Burundi</option>
+                <option value="18">Cameroon</option>
+                <option value="19">Canada</option>
+                <option value="20">Central African Republic</option>
+                <option value="21">Chile</option>
+                <option value="22">Colombia</option>
+                <option value="23">Croatia</option>
+                <option value="24">Denmark</option>
+                <option value="25">Dominican Republic</option>
+                <option value="26">Ecuador</option>
+                <option value="27">Egypt</option>
+                <option value="28">El Salvador</option>
+                <option value="29">Eritrea</option>
+                <option value="30">Estonia</option>
+                <option value="31">Finland</option>
+                <option value="32">France</option>
+                <option value="33">Germany</option>
+                <option value="34">Ghana</option>
+                <option value="35">Greece</option>
+                <option value="36">Guatemala</option>
+                <option value="37">Guinea</option>
+                <option value="38">Guyana</option>
+                <option value="39">Haiti</option>
+                <option value="40">Honduras</option>
+                <option value="41">Hungary</option>
+                <option value="42">India</option>
+                <option value="43">Indonesia</option>
+                <option value="44">Iraq</option>
+                <option value="45">Ireland</option>
+                <option value="46">Italy</option>
+                <option value="47">Jamaica</option>
+                <option value="48">Japan</option>
+                <option value="49">Kazakhstan</option>
+                <option value="50">Kenya</option>
+                <option value="51">Latvia</option>
+                <option value="52">Lebanon</option>
+                <option value="53">Lesotho</option>
+                <option value="54">Libya</option>
+                <option value="55">Lithuania</option>
+                <option value="56">Madagascar</option>
+                <option value="57">Malawi</option>
+                <option value="58">Malaysia</option>
+                <option value="59">Mali</option>
+                <option value="60">Mauritania</option>
+                <option value="61">Mauritius</option>
+                <option value="62">Mexico</option>
+                <option value="63">Montenegro</option>
+                <option value="64">Morocco</option>
+                <option value="65">Mozambique</option>
+                <option value="66">Namibia</option>
+                <option value="67">Nepal</option>
+                <option value="68">Netherlands</option>
+                <option value="69">New Zealand</option>
+                <option value="70">Nicaragua</option>
+                <option value="71">Niger</option>
+                <option value="72">Norway</option>
+                <option value="73">Pakistan</option>
+                <option value="74">Papua New Guinea</option>
+                <option value="75">Peru</option>
+                <option value="76">Poland</option>
+                <option value="77">Portugal</option>
+                <option value="78">Qatar</option>
+                <option value="79">Romania</option>
+                <option value="80">Rwanda</option>
+                <option value="81">Saudi Arabia</option>
+                <option value="82">Senegal</option>
+                <option value="83">Slovenia</option>
+                <option value="84">South Africa</option>
+                <option value="85">Spain</option>
+                <option value="86">Sri Lanka</option>
+                <option value="87">Sudan</option>
+                <option value="88">Suriname</option>
+                <option value="89">Sweden</option>
+                <option value="90">Switzerland</option>
+                <option value="91">Tajikistan</option>
+                <option value="92">Thailand</option>
+                <option value="93">Tunisia</option>
+                <option value="94">Turkey</option>
+                <option value="95">Uganda</option>
+                <option value="96">Ukraine</option>
+                <option value="97">United Kingdom</option>
+                <option value="98">Uruguay</option>
+                <option value="99">Zambia</option>
+                <option value="100">Zimbabwe</option>
+            </select><br><br>
+            </div>
+            <div class="mb-3"><label for="item">Item (encoded):</label>
+                <select id="item" name="item" required>
+                    <option value="0">Cassava</option>
+                    <option value="1">Maize</option>
+                    <option value="2">Plantains and others</option>
+                    <option value="3">Potatoes</option>
+                    <option value="4">Rice, paddy</option>
+                    <option value="5">Sorghum</option>
+                    <option value="6">Soybeans</option>
+                    <option value="7">Sweet potatoes</option>
+                    <option value="8">Wheat</option>
+                    <option value="9">Yams</option>
+                </select><br><br></div>
+
+                <div class="text-center">
+                    <button type="submit">Predict Yield</button>
+                </div>
+            </form>
+
+            {% if predicted_yield %}
+                <h3 class="text-center mt-4">Predicted Yield: {{ predicted_yield }}</h3>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
